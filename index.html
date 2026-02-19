@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Eventos en Perú</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<style>
+#map {
+  height: 600px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Mapa de Eventos en Perú</h2>
+<div id="map"></div>
+
+<script>
+
+// Crear mapa centrado en Perú
+var map = L.map('map').setView([-9.19, -75.015], 6);
+
+// Capa base OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+
+// Ejemplo de evento
+L.marker([-12.0464, -77.0428]).addTo(map)
+    .bindPopup("<b>Evento en Lima</b><br>15 de Marzo 2026");
+
+</script>
+
+</body>
+</html>
