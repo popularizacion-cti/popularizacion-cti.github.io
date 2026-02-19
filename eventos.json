@@ -1,14 +1,20 @@
 [
   {
     "nombre": "Feria Científica Lima",
+    "ciudad": "Lima",
+    "region": "Costa",
+    "tipo": "Ciencia",
+    "fecha": "2026-03-15",
     "lat": -12.0464,
-    "lng": -77.0428,
-    "fecha": "15 Marzo 2026"
+    "lng": -77.0428
   },
   {
-    "nombre": "Congreso Regional Cusco",
+    "nombre": "Congreso Andino",
+    "ciudad": "Cusco",
+    "region": "Sierra",
+    "tipo": "Académico",
+    "fecha": "2026-06-20",
     "lat": -13.5319,
-    "lng": -71.9675,
-    "fecha": "20 Junio 2026"
+    "lng": -71.9675
   }
 ]
