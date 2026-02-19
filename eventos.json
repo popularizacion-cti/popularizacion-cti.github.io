@@ -1,0 +1,14 @@
+[
+  {
+    "nombre": "Feria Científica Lima",
+    "lat": -12.0464,
+    "lng": -77.0428,
+    "fecha": "15 Marzo 2026"
+  },
+  {
+    "nombre": "Congreso Regional Cusco",
+    "lat": -13.5319,
+    "lng": -71.9675,
+    "fecha": "20 Junio 2026"
+  }
+]
