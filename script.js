@@ -74,7 +74,7 @@ function aplicarFiltros() {
 
 function estiloRegion(feature) {
 
-  const regionNombre = feature.properties.NAME_1; // ⚠ Ajustar si tu geojson usa otro nombre
+  const regionNombre = String(feature.properties.NOMBDEP).toUpperCase();
   const filtrados = aplicarFiltros();
   const cantidad = filtrados.filter(e => e.region === regionNombre).length;
 
@@ -96,8 +96,10 @@ function escalaColor(valor) {
 
 function onEachRegion(feature, layer) {
 
-  const regionNombre = feature.properties.NAME_1;
-  const filtrados = aplicarFiltros().filter(e => e.region === regionNombre);
+  const regionNombre = String(feature.properties.NOMBDEP).toUpperCase();
+  const filtrados = aplicarFiltros().filter(e =>
+  e.region.toUpperCase() === regionNombre
+  );
 
   const totalEncuentros = filtrados.length;
   const totalClubes = filtrados.reduce((a,b)=>a+b.clubes,0);
