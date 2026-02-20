@@ -117,10 +117,13 @@ function aplicarFiltrosDatos() {
 }
 
 function actualizarVisualizacion() {
-  geoLayer.setStyle(estiloRegion);
+  if (geoLayer) {
+    geoLayer.setStyle(estiloRegion);
+  }
   actualizarIndicadoresGenerales();
   actualizarGrafico();
 }
+
 
 function actualizarIndicadoresGenerales() {
 
