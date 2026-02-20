@@ -17,7 +17,7 @@ async function cargarDatos() {
     ciudad: r.c[1]?.v,
     region: r.c[2]?.v,
     ugel: r.c[3]?.v,
-    fecha: r.c[4]?.v,
+    fecha: r.c[4]?.v ? String(r.c[4].v) : "",
     institucion: r.c[5]?.v,
     lugar: r.c[6]?.v,
     alcance: r.c[7]?.v,
@@ -143,9 +143,11 @@ function actualizarGrafico() {
   const porAnio = {};
 
   eventosGlobal.forEach(e=>{
-    const anio = String(e.fecha).substring(0,4);
-    porAnio[anio] = (porAnio[anio] || 0) + 1;
+  if (!e.fecha) return;
+  const anio = String(e.fecha).substring(0,4);
+  porAnio[anio] = (porAnio[anio] || 0) + 1;
   });
+
 
   if (grafico) {
     grafico.destroy();
@@ -166,7 +168,11 @@ function actualizarGrafico() {
 
 function cargarFiltros() {
 
-  const anios = [...new Set(eventosGlobal.map(e=>e.fecha.substring(0,4)))];
+  const anios = [...new Set(
+  eventosGlobal
+    .filter(e => e.fecha)
+    .map(e => String(e.fecha).substring(0,4))
+  )];
   const regiones = [...new Set(eventosGlobal.map(e=>e.region))];
   const instituciones = [...new Set(eventosGlobal.map(e=>e.institucion))];
   const alcances = [...new Set(eventosGlobal.map(e=>e.alcance))];
