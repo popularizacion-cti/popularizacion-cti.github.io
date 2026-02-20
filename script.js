@@ -142,7 +142,7 @@ function actualizarGrafico() {
   const porAnio = {};
 
   eventosGlobal.forEach(e=>{
-    const anio = e.fecha.substring(0,4);
+    cconst anio = String(e.fecha).substring(0,4);
     porAnio[anio] = (porAnio[anio] || 0) + 1;
   });
 
