@@ -10,23 +10,30 @@ async function cargarDatos() {
 
   const response = await fetch(URL);
   const text = await response.text();
-  const json = JSON.parse(text.substr(47).slice(0, -2));
+
+  const json = JSON.parse(
+    text.substring(
+      text.indexOf("{"),
+      text.lastIndexOf("}") + 1
+    )
+  );
 
   eventosGlobal = json.table.rows.map(r => ({
-    nombre: r.c[0]?.v,
-    ciudad: r.c[1]?.v,
-    region: r.c[2]?.v,
-    ugel: r.c[3]?.v,
-    fecha: r.c[4]?.v ? String(r.c[4].v) : "",
-    institucion: r.c[5]?.v,
-    lugar: r.c[6]?.v,
-    alcance: r.c[7]?.v,
-    descripcion: r.c[8]?.v,
-    enlace: r.c[9]?.v,
-    clubes: Number(r.c[10]?.v || 0),
-    alumnos: Number(r.c[11]?.v || 0),
-    docentes: Number(r.c[12]?.v || 0),
-    modalidad: r.c[13]?.v
+    nombre: r.c[0]?.v || "",
+    ciudad: r.c[1]?.v || "",
+    region: r.c[2]?.v || "",
+    ugel: r.c[3]?.v || "",
+    mes: r.c[4]?.v || "",
+    anio: String(r.c[5]?.v || ""),
+    institucion: r.c[6]?.v || "",
+    lugar: r.c[7]?.v || "",
+    alcance: r.c[8]?.v || "",
+    descripcion: r.c[9]?.v || "",
+    enlace: r.c[10]?.v || "",
+    clubes: Number(r.c[11]?.v || 0),
+    alumnos: Number(r.c[12]?.v || 0),
+    docentes: Number(r.c[13]?.v || 0),
+    modalidad: r.c[14]?.v || ""
   }));
 
   inicializarMapa();
@@ -50,13 +57,29 @@ function inicializarMapa() {
     });
 }
 
+function aplicarFiltros() {
+
+  const anio = document.getElementById("filtroAnio").value;
+  const region = document.getElementById("filtroRegion").value;
+  const inst = document.getElementById("filtroInstitucion").value;
+  const alcance = document.getElementById("filtroAlcance").value;
+
+  return eventosGlobal.filter(e =>
+    (!anio || e.anio === anio) &&
+    (!region || e.region === region) &&
+    (!inst || e.institucion === inst) &&
+    (!alcance || e.alcance === alcance)
+  );
+}
+
 function estiloRegion(feature) {
 
-  const region = feature.properties.NOMBDEP;
-  const datos = calcularIndicadoresRegion(region);
+  const regionNombre = feature.properties.NAME_1; // ⚠ Ajustar si tu geojson usa otro nombre
+  const filtrados = aplicarFiltros();
+  const cantidad = filtrados.filter(e => e.region === regionNombre).length;
 
   return {
-    fillColor: escalaColor(datos.encuentros),
+    fillColor: escalaColor(cantidad),
     weight: 1,
     color: "#444",
     fillOpacity: 0.7
@@ -73,85 +96,47 @@ function escalaColor(valor) {
 
 function onEachRegion(feature, layer) {
 
-  const region = feature.properties.NOMBDEP;
-  const datos = calcularIndicadoresRegion(region);
+  const regionNombre = feature.properties.NAME_1;
+  const filtrados = aplicarFiltros().filter(e => e.region === regionNombre);
+
+  const totalEncuentros = filtrados.length;
+  const totalClubes = filtrados.reduce((a,b)=>a+b.clubes,0);
+  const totalAlumnos = filtrados.reduce((a,b)=>a+b.alumnos,0);
 
   layer.bindPopup(`
-    <strong>${region}</strong><br>
-    Encuentros: ${datos.encuentros}<br>
-    Clubes: ${datos.clubes}<br>
-    Participantes: ${datos.alumnos}<br>
-    Docentes: ${datos.docentes}
+    <strong>${regionNombre}</strong><br>
+    Encuentros: ${totalEncuentros}<br>
+    Clubes: ${totalClubes}<br>
+    Participantes: ${totalAlumnos}
   `);
 }
 
-function calcularIndicadoresRegion(region) {
-
-  const filtrados = aplicarFiltrosDatos();
-
-  const regionData = filtrados.filter(e => e.region === region);
-
-  return {
-    encuentros: regionData.length,
-    clubes: regionData.reduce((a,b)=>a+b.clubes,0),
-    alumnos: regionData.reduce((a,b)=>a+b.alumnos,0),
-    docentes: regionData.reduce((a,b)=>a+b.docentes,0)
-  };
-}
-
-function aplicarFiltrosDatos() {
-
-  const anio = document.getElementById("filtroAnio").value;
-  const region = document.getElementById("filtroRegion").value;
-  const inst = document.getElementById("filtroInstitucion").value;
-  const alcance = document.getElementById("filtroAlcance").value;
-
-  return eventosGlobal.filter(e => {
-
-    const anioMatch = !anio || e.fecha.startsWith(anio);
-    const regionMatch = !region || e.region === region;
-    const instMatch = !inst || e.institucion === inst;
-    const alcanceMatch = !alcance || e.alcance === alcance;
-
-    return anioMatch && regionMatch && instMatch && alcanceMatch;
-  });
-}
-
 function actualizarVisualizacion() {
-  if (geoLayer) {
-    geoLayer.setStyle(estiloRegion);
-  }
-  actualizarIndicadoresGenerales();
+  if (geoLayer) geoLayer.setStyle(estiloRegion);
+  actualizarIndicadores();
   actualizarGrafico();
 }
 
+function actualizarIndicadores() {
 
-function actualizarIndicadoresGenerales() {
-
-  const filtrados = aplicarFiltrosDatos();
+  const filtrados = aplicarFiltros();
   const regionesActivas = new Set(filtrados.map(e=>e.region));
 
   document.getElementById("kpiCobertura").innerHTML =
     `<strong>Cobertura territorial:</strong> ${regionesActivas.size} regiones`;
 
-  document.getElementById("kpiIntensidad").innerHTML =
+  document.getElementById("kpiTotal").innerHTML =
     `<strong>Total encuentros:</strong> ${filtrados.length}`;
 }
 
 function actualizarGrafico() {
 
   const porAnio = {};
-
   eventosGlobal.forEach(e=>{
-  if (!e.fecha) return;
-  const anio = String(e.fecha).substring(0,4);
-  porAnio[anio] = (porAnio[anio] || 0) + 1;
+    porAnio[e.anio] = (porAnio[e.anio] || 0) + 1;
   });
 
-
-  if (grafico) {
-    grafico.destroy();
-  }
+  if (grafico) grafico.destroy();
 
   grafico = new Chart(document.getElementById("graficoCrecimiento"), {
     type: "line",
@@ -165,22 +150,12 @@ function actualizarGrafico() {
   });
 }
 
-
 function cargarFiltros() {
 
-  const anios = [...new Set(
-  eventosGlobal
-    .filter(e => e.fecha)
-    .map(e => String(e.fecha).substring(0,4))
-  )];
-  const regiones = [...new Set(eventosGlobal.map(e=>e.region))];
-  const instituciones = [...new Set(eventosGlobal.map(e=>e.institucion))];
-  const alcances = [...new Set(eventosGlobal.map(e=>e.alcance))];
-
-  llenarSelect("filtroAnio", anios);
-  llenarSelect("filtroRegion", regiones);
-  llenarSelect("filtroInstitucion", instituciones);
-  llenarSelect("filtroAlcance", alcances);
+  llenarSelect("filtroAnio", [...new Set(eventosGlobal.map(e=>e.anio))]);
+  llenarSelect("filtroRegion", [...new Set(eventosGlobal.map(e=>e.region))]);
+  llenarSelect("filtroInstitucion", [...new Set(eventosGlobal.map(e=>e.institucion))]);
+  llenarSelect("filtroAlcance", [...new Set(eventosGlobal.map(e=>e.alcance))]);
 
   document.querySelectorAll("select").forEach(s=>{
     s.addEventListener("change", actualizarVisualizacion);
@@ -190,7 +165,7 @@ function cargarFiltros() {
 function llenarSelect(id, datos) {
   const select = document.getElementById(id);
   select.innerHTML = `<option value="">Todos</option>`;
-  datos.forEach(d=>{
+  datos.filter(Boolean).forEach(d=>{
     select.innerHTML += `<option value="${d}">${d}</option>`;
   });
 }
