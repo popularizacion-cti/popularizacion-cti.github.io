@@ -4,6 +4,7 @@ const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:
 let eventosGlobal = [];
 let map;
 let geoLayer;
+let grafico;
 
 async function cargarDatos() {
 
@@ -142,11 +143,15 @@ function actualizarGrafico() {
   const porAnio = {};
 
   eventosGlobal.forEach(e=>{
-    cconst anio = String(e.fecha).substring(0,4);
+    const anio = String(e.fecha).substring(0,4);
     porAnio[anio] = (porAnio[anio] || 0) + 1;
   });
 
-  new Chart(document.getElementById("graficoCrecimiento"), {
+  if (grafico) {
+    grafico.destroy();
+  }
+
+  grafico = new Chart(document.getElementById("graficoCrecimiento"), {
     type: "line",
     data: {
       labels: Object.keys(porAnio),
@@ -157,6 +162,7 @@ function actualizarGrafico() {
     }
   });
 }
+
 
 function cargarFiltros() {
 
