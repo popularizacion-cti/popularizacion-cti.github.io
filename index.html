@@ -1,40 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<meta charset="utf-8" />
-<title>Encuentros de CCyT en Perú 2026 - Version 2</title>
+<meta charset="utf-8"/>
+<title>Observatorio Nacional - Encuentros de Clubes</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"/>
-<link rel="stylesheet" href="style.css"/>
-
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<link rel="stylesheet" href="style.css"/>
 </head>
 
 <body>
 
-<div id="sidebar">
-  <h2>Encuentros de CCyT 2026</h2>
+<header>
+<h1>Observatorio Nacional de Encuentros</h1>
+<p>Clubes de Ciencia y Tecnología - Perú</p>
+</header>
 
-  <label>Filtrar por mes:</label>
-  <select id="filtroMes">
-    <option value="todos">Todos</option>
-  </select>
+<section class="filters">
+<select id="filtroAnio"></select>
+<select id="filtroRegion"></select>
+<select id="filtroInstitucion"></select>
+<select id="filtroAlcance"></select>
+</section>
 
-  <label><br>Filtrar por región:</label>
-  <select id="filtroRegion">
-    <option value="todas">Todas</option>
-  </select>
-
-  <div id="listaEventos"></div>
-</div>
+<section class="indicadores">
+<div id="kpiCobertura"></div>
+<div id="kpiIntensidad"></div>
+</section>
 
 <div id="map"></div>
 
-<script src="script.js"></script>
+<section class="graficos">
+<canvas id="graficoCrecimiento"></canvas>
+</section>
 
+<script src="script.js"></script>
 </body>
 </html>
