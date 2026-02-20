@@ -1,5 +1,5 @@
 const SHEET_ID = "1KXmB725GOfa-ROh7L9MHNcgAT9KqXDFrwNGOZmAJe1s";
-const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+const URL = "https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json";
 
 let eventosGlobal = [];
 let map;
