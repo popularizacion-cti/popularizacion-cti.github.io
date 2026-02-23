@@ -60,11 +60,11 @@ header {
 ================================ */
 
 #map {
-  width: 800px !important;     /* 🔒 ANCHO FIJO */
+  width: 600px !important;     /* 🔒 ANCHO FIJO */
   height: 900px !important;    /* 🔒 ALTO FIJO */
-  min-width: 800px;            /* 🔒 Evita que flex lo reduzca */
-  max-width: 800px;            /* 🔒 Evita que crezca */
-  flex: 0 0 800px;             /* 🔒 Bloquea comportamiento flex */
+  min-width: 600px;            /* 🔒 Evita que flex lo reduzca */
+  max-width: 600px;            /* 🔒 Evita que crezca */
+  flex: 0 0 600px;             /* 🔒 Bloquea comportamiento flex */
 }
 
 /* ================================
