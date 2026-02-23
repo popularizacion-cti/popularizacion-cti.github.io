@@ -131,10 +131,8 @@ header {
 
 /* Cada gráfico */
 .graficos canvas {
-  width: 30% !important;
+  width: 400px !important;
   height: 400px !important;
-  min-width: 400px;
-  max-width: 600px;
   background: white;
   border: 1px solid #ddd;
   padding: 10px;
