@@ -1,16 +1,23 @@
+// ================================
+// CONFIGURACIÓN GOOGLE SHEETS
+// ================================
 const SHEET_ID = "1KXmB725GOfa-ROh7L9MHNcgAT9KqXDFrwNGOZmAJe1s";
 const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
 let eventosGlobal = [];
 let map;
 let geoLayer;
-let grafico;
+let grafico1, grafico2, grafico3;
 
+// ================================
+// CARGA DE DATOS
+// ================================
 async function cargarDatos() {
 
   const response = await fetch(URL);
   const text = await response.text();
 
+  // Extraemos el JSON real del wrapper de Google
   const json = JSON.parse(
     text.substring(
       text.indexOf("{"),
@@ -18,6 +25,7 @@ async function cargarDatos() {
     )
   );
 
+  // Transformamos datos
   eventosGlobal = json.table.rows.map(r => ({
     nombre: r.c[0]?.v || "",
     ciudad: r.c[1]?.v || "",
@@ -41,8 +49,19 @@ async function cargarDatos() {
   actualizarVisualizacion();
 }
 
+// ================================
+// MAPA BLOQUEADO EN PERÚ
+// ================================
 function inicializarMapa() {
-  map = L.map('map').setView([-9.19, -75.015], 6);
+
+  map = L.map('map', {
+    minZoom: 6,
+    maxBounds: [
+      [-20, -85],
+      [5, -65]
+    ],
+    maxBoundsViscosity: 1.0
+  }).setView([-9.19, -75.015], 6);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
     .addTo(map);
@@ -57,6 +76,9 @@ function inicializarMapa() {
     });
 }
 
+// ================================
+// FILTROS
+// ================================
 function aplicarFiltros() {
 
   const anio = document.getElementById("filtroAnio").value;
@@ -72,86 +94,185 @@ function aplicarFiltros() {
   );
 }
 
+// ================================
+// ESTILO DINÁMICO DEL MAPA
+// ================================
 function estiloRegion(feature) {
 
   const regionNombre = String(feature.properties.NOMBDEP).toUpperCase();
   const filtrados = aplicarFiltros();
-  const cantidad = filtrados.filter(e => e.region === regionNombre).length;
+
+  const cantidad = filtrados.filter(e =>
+    e.region.toUpperCase() === regionNombre
+  ).length;
+
+  const max = Math.max(
+    ...Object.values(
+      filtrados.reduce((acc, e) => {
+        acc[e.region] = (acc[e.region] || 0) + 1;
+        return acc;
+      }, {})
+    ),
+    0
+  );
+
+  // Transparente si no hay eventos
+  if (cantidad === 0) {
+    return { fillColor: "transparent", weight: 1, color: "#999", fillOpacity: 0.3 };
+  }
+
+  const intensidad = cantidad / max;
 
   return {
-    fillColor: escalaColor(cantidad),
+    fillColor: `rgba(181,18,27, ${intensidad})`,
     weight: 1,
     color: "#444",
-    fillOpacity: 0.7
+    fillOpacity: 0.8
   };
 }
 
-function escalaColor(valor) {
-  return valor > 15 ? "#7A0008" :
-         valor > 8  ? "#B5121B" :
-         valor > 4  ? "#D62828" :
-         valor > 1  ? "#F77F00" :
-                      "#FFE5D9";
-}
-
+// ================================
+// POPUP POR REGIÓN
+// ================================
 function onEachRegion(feature, layer) {
 
   const regionNombre = String(feature.properties.NOMBDEP).toUpperCase();
-  const filtrados = aplicarFiltros().filter(e =>
-  e.region.toUpperCase() === regionNombre
-  );
 
-  const totalEncuentros = filtrados.length;
-  const totalClubes = filtrados.reduce((a,b)=>a+b.clubes,0);
-  const totalAlumnos = filtrados.reduce((a,b)=>a+b.alumnos,0);
+  layer.on("click", () => {
 
-  layer.bindPopup(`
-    <strong>${regionNombre}</strong><br>
-    Encuentros: ${totalEncuentros}<br>
-    Clubes: ${totalClubes}<br>
-    Participantes: ${totalAlumnos}
-  `);
+    const filtrados = aplicarFiltros().filter(e =>
+      e.region.toUpperCase() === regionNombre
+    );
+
+    const total = filtrados.length;
+    const asistentes = filtrados.reduce((a,b)=>a+b.alumnos,0);
+
+    layer.bindPopup(`
+      <strong>${regionNombre}</strong><br>
+      Encuentros: ${total}<br>
+      Asistentes: ${asistentes}
+    `).openPopup();
+  });
 }
 
-function actualizarVisualizacion() {
-  if (geoLayer) geoLayer.setStyle(estiloRegion);
-  actualizarIndicadores();
-  actualizarGrafico();
+// ================================
+// LISTA LATERAL
+// ================================
+function actualizarLista() {
+
+  const contenedor = document.getElementById("listaEventos");
+  const filtrados = aplicarFiltros();
+
+  contenedor.innerHTML = "";
+
+  filtrados.forEach(e => {
+    contenedor.innerHTML += `
+      <div class="evento-item">
+        <strong>${e.nombre}</strong><br>
+        ${e.region} - ${e.mes} ${e.anio}<br>
+        Asistentes: ${e.alumnos}
+      </div>
+    `;
+  });
 }
 
+// ================================
+// INDICADORES
+// ================================
 function actualizarIndicadores() {
 
   const filtrados = aplicarFiltros();
-  const regionesActivas = new Set(filtrados.map(e=>e.region));
+  const regiones = new Set(filtrados.map(e=>e.region));
+  const asistentes = filtrados.reduce((a,b)=>a+b.alumnos,0);
 
   document.getElementById("kpiCobertura").innerHTML =
-    `<strong>Cobertura territorial:</strong> ${regionesActivas.size} regiones`;
+    `Cobertura territorial: ${regiones.size} regiones`;
 
   document.getElementById("kpiTotal").innerHTML =
-    `<strong>Total encuentros:</strong> ${filtrados.length}`;
+    `Total encuentros: ${filtrados.length}`;
+
+  document.getElementById("kpiAsistentes").innerHTML =
+    `Total asistentes: ${asistentes}`;
 }
 
-function actualizarGrafico() {
+// ================================
+// GRÁFICOS
+// ================================
+function actualizarGraficos() {
 
+  const filtrados = aplicarFiltros();
+
+  // Encuentros por año
   const porAnio = {};
-  eventosGlobal.forEach(e=>{
+  filtrados.forEach(e=>{
     porAnio[e.anio] = (porAnio[e.anio] || 0) + 1;
   });
 
-  if (grafico) grafico.destroy();
+  if (grafico1) grafico1.destroy();
 
-  grafico = new Chart(document.getElementById("graficoCrecimiento"), {
+  grafico1 = new Chart(document.getElementById("graficoEncuentros"), {
     type: "line",
     data: {
       labels: Object.keys(porAnio),
       datasets: [{
-        label: "Crecimiento anual nacional",
+        label: "Encuentros por año",
         data: Object.values(porAnio)
+      }]
+    }
+  });
+
+  // Asistentes por año
+  const asistentesAnio = {};
+  filtrados.forEach(e=>{
+    asistentesAnio[e.anio] = (asistentesAnio[e.anio] || 0) + e.alumnos;
+  });
+
+  if (grafico2) grafico2.destroy();
+
+  grafico2 = new Chart(document.getElementById("graficoAsistentes"), {
+    type: "bar",
+    data: {
+      labels: Object.keys(asistentesAnio),
+      datasets: [{
+        label: "Asistentes por año",
+        data: Object.values(asistentesAnio)
+      }]
+    }
+  });
+
+  // Regiones con más encuentros
+  const regiones = {};
+  filtrados.forEach(e=>{
+    regiones[e.region] = (regiones[e.region] || 0) + 1;
+  });
+
+  if (grafico3) grafico3.destroy();
+
+  grafico3 = new Chart(document.getElementById("graficoRegiones"), {
+    type: "bar",
+    data: {
+      labels: Object.keys(regiones),
+      datasets: [{
+        label: "Encuentros por región",
+        data: Object.values(regiones)
       }]
     }
   });
 }
 
+// ================================
+// ACTUALIZACIÓN GLOBAL
+// ================================
+function actualizarVisualizacion() {
+  if (geoLayer) geoLayer.setStyle(estiloRegion);
+  actualizarIndicadores();
+  actualizarGraficos();
+  actualizarLista();
+}
+
+// ================================
+// CARGA DE FILTROS
+// ================================
 function cargarFiltros() {
 
   llenarSelect("filtroAnio", [...new Set(eventosGlobal.map(e=>e.anio))]);
