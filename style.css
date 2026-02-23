@@ -54,9 +54,24 @@ header {
   width: 70%;
 }
 
+/* ================================
+   CONTENEDOR DE GRÁFICOS RESPONSIVO
+================================ */
+
 .graficos {
   padding: 20px;
   background: white;
-  display: grid;
-  gap: 30px;
+  display: flex;
+  flex-wrap: wrap;          /* Permite salto de línea automático */
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Cada gráfico */
+.graficos canvas {
+  width: 600px !important;
+  height: 400px !important;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
 }
