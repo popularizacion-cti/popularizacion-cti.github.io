@@ -44,24 +44,63 @@ header {
 
 /* ================================
    LISTA LATERAL FIJA CON SCROLL
+   - Altura igual al mapa (600px)
+   - Scroll interno automático
+   - Barra de scroll a la izquierda
+   - Tamaño fijo dentro del layout
 ================================ */
 
 #listaEventos {
-  width: 320px;              /* ancho fijo de la lista */
-  height: 900px;             /* 🔒 MISMA ALTURA QUE EL MAPA */
-  overflow-y: auto;          /* 🔒 Activa scroll vertical */
-  overflow-x: hidden;
+  width: 320px;              /* 🔒 ANCHO FIJO DE LA LISTA */
+  height: 600px;             /* 🔒 MISMA ALTURA QUE EL MAPA */
   background: white;
   padding: 10px;
   border-right: 1px solid #ddd;
 
-  /* 🔒 Evita que flex la deforme */
-  flex: 0 0 320px;
+  overflow-y: auto;          /* 🔒 Activa scroll vertical */
+  overflow-x: hidden;
+
+  flex: 0 0 320px;           /* 🔒 Evita que flex lo deforme */
+
+  direction: rtl;            /* 🔒 Mueve scrollbar a la izquierda */
 }
+
+/* Mantiene el texto en dirección normal */
+#listaEventos * {
+  direction: ltr;
+}
+
+/* ================================
+   ESTILO DE CADA EVENTO
+================================ */
 
 .evento-item {
   padding: 10px;
   border-bottom: 1px solid #eee;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.evento-item:hover {
+  background: #F4F6F8;
+  cursor: pointer;
+}
+
+/* ================================
+   SCROLL PERSONALIZADO (Chrome / Edge)
+================================ */
+
+#listaEventos::-webkit-scrollbar {
+  width: 8px;
+}
+
+#listaEventos::-webkit-scrollbar-thumb {
+  background: #B5121B;
+  border-radius: 4px;
+}
+
+#listaEventos::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
 
 /* ================================
