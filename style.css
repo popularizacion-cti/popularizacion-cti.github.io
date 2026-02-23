@@ -34,7 +34,9 @@ header {
 
 .main-layout {
   display: flex;
-  height: 60vh;
+  justify-content: center;  /* centra el bloque */
+  align-items: flex-start;
+  gap: 20px;
 }
 
 #listaEventos {
@@ -56,7 +58,7 @@ header {
 
 #map {
   width: 600px;   /* 🔒 ANCHO FIJO (horizontal) */
-  height: 900px;  /* 🔒 ALTO FIJO (vertical) */
+  : 900px;  /* 🔒 ALTO FIJO (vertical) */
 }
 
 /* ================================
