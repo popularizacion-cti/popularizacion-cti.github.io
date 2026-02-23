@@ -50,8 +50,13 @@ header {
   border-bottom: 1px solid #eee;
 }
 
+/* ================================
+   MAPA CON TAMAÑO FIJO
+================================ */
+
 #map {
-  width: 70%;
+  width: 600px;   /* 🔒 ANCHO FIJO (horizontal) */
+  height: 900px;  /* 🔒 ALTO FIJO (vertical) */
 }
 
 /* ================================
