@@ -202,7 +202,7 @@ function actualizarLista() {
     contenedor.innerHTML += `
       <div class="evento-item">
         <strong>${e.nombre}</strong><br>
-        ${e.region} - ${e.mes} ${e.anio}<br>
+        Región ${e.region} - ${e.mes} ${e.anio}<br>
         Asistentes: ${e.participantes} (${e.alumnos} estudiantes y ${e.docentes} docentes)
       </div>
     `;
