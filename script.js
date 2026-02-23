@@ -50,30 +50,50 @@ async function cargarDatos() {
 }
 
 // ================================
-// MAPA FIJO BLOQUEADO EN PERÚ
+// MAPA COMPLETAMENTE BLOQUEADO EN PERÚ
 // ================================
 function inicializarMapa() {
 
   map = L.map('map', {
-    zoomControl: false,     // Quita botones +/-
-    dragging: false,        // No permite mover
-    scrollWheelZoom: false, // Desactiva zoom con rueda
+
+    // 🔒 Desactiva todos los controles de interacción
+    zoomControl: false,
+    dragging: false,
+    scrollWheelZoom: false,
     doubleClickZoom: false,
     boxZoom: false,
     keyboard: false,
     touchZoom: false,
+
+    // 🔒 Fija el nivel de zoom (no permite acercar ni alejar)
     minZoom: 6,
-    maxZoom: 6,             // MISMO zoom = bloqueado
+    maxZoom: 6,
+
+    // 🔒 BLOQUEO GEOGRÁFICO DEL MAPA
     maxBounds: [
-      [-20, -85],
-      [5, -65]
+
+      // 👉 PRIMER PAR = ESQUINA SUROESTE
+      //    [LATITUD, LONGITUD]
+      //    LATITUD controla ALTO (arriba-abajo)
+      //    LONGITUD controla ANCHO (izquierda-derecha)
+
+      [-20, -85],   // 🔒 Alto inferior (Sur)  | 🔒 Ancho izquierdo (Oeste)
+
+      // 👉 SEGUNDO PAR = ESQUINA NORESTE
+      [5, -65]      // 🔒 Alto superior (Norte) | 🔒 Ancho derecho (Este)
+
     ],
+
+    // Hace que el mapa "rebote" si intenta salirse
     maxBoundsViscosity: 1.0
+
   }).setView([-9.19, -75.015], 6);
 
+  // Capa base
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
     .addTo(map);
 
+  // Carga del GeoJSON
   fetch('peru-regiones.geojson')
     .then(res => res.json())
     .then(data => {
