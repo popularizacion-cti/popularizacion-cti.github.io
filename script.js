@@ -175,11 +175,15 @@ function onEachRegion(feature, layer) {
 
     const total = filtrados.length;
     const asistentes = filtrados.reduce((a,b)=>a+b.participantes,0);
+    const alum = filtrados.reduce((a,b)=>a+b.alumnos,0);
+    const doce = filtrados.reduce((a,b)=>a+b.docentes,0);
 
     layer.bindPopup(`
       <strong>${regionNombre}</strong><br>
       Encuentros: ${total}<br>
-      Asistentes: ${asistentes}
+      Asistentes: ${asistentes}<br>
+            Estudiantes: ${alum}<br>
+            Docentes: ${doce}
     `).openPopup();
   });
 }
@@ -200,6 +204,8 @@ function actualizarLista() {
         <strong>${e.nombre}</strong><br>
         ${e.region} - ${e.mes} ${e.anio}<br>
         Asistentes: ${e.participantes}
+            Estudiantes: ${e.alumnos}
+            Docentes: ${e.docentes}
       </div>
     `;
   });
@@ -213,6 +219,8 @@ function actualizarIndicadores() {
   const filtrados = aplicarFiltros();
   const regiones = new Set(filtrados.map(e=>e.region));
   const asistentes = filtrados.reduce((a,b)=>a+b.participantes,0);
+  const alum = filtrados.reduce((a,b)=>a+b.alumnos,0);
+  const doce = filtrados.reduce((a,b)=>a+b.docentes,0);
 
   document.getElementById("kpiCobertura").innerHTML =
     `Cobertura territorial: ${regiones.size} regiones`;
@@ -221,7 +229,7 @@ function actualizarIndicadores() {
     `Total encuentros: ${filtrados.length}`;
 
   document.getElementById("kpiAsistentes").innerHTML =
-    `Total asistentes: ${asistentes}`;
+    `Total asistentes: ${asistentes} (${alum} estudiantes y ${doce} docentes)`;
 }
 
 // ================================
