@@ -42,12 +42,21 @@ header {
   height: auto;
 }
 
+/* ================================
+   LISTA LATERAL FIJA CON SCROLL
+================================ */
+
 #listaEventos {
-  width: 30%;
-  overflow-y: auto;
+  width: 320px;              /* ancho fijo de la lista */
+  height: 900px;             /* 🔒 MISMA ALTURA QUE EL MAPA */
+  overflow-y: auto;          /* 🔒 Activa scroll vertical */
+  overflow-x: hidden;
   background: white;
   padding: 10px;
   border-right: 1px solid #ddd;
+
+  /* 🔒 Evita que flex la deforme */
+  flex: 0 0 320px;
 }
 
 .evento-item {
