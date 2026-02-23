@@ -34,9 +34,12 @@ header {
 
 .main-layout {
   display: flex;
-  justify-content: center;  /* centra el bloque */
+  justify-content: center;   /* centra el bloque */
   align-items: flex-start;
   gap: 20px;
+
+  /* 🔒 Evita que el contenedor intente adaptar altura */
+  height: auto;
 }
 
 #listaEventos {
@@ -53,12 +56,15 @@ header {
 }
 
 /* ================================
-   MAPA CON TAMAÑO FIJO
+   MAPA TAMAÑO FIJO REAL
 ================================ */
 
 #map {
-  width: 600px;   /* 🔒 ANCHO FIJO (horizontal) */
-  : 900px;  /* 🔒 ALTO FIJO (vertical) */
+  width: 600px !important;     /* 🔒 ANCHO FIJO */
+  height: 900px !important;    /* 🔒 ALTO FIJO */
+  min-width: 600px;            /* 🔒 Evita que flex lo reduzca */
+  max-width: 600px;            /* 🔒 Evita que crezca */
+  flex: 0 0 600px;             /* 🔒 Bloquea comportamiento flex */
 }
 
 /* ================================
