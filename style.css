@@ -5,7 +5,7 @@ body {
 }
 
 header {
-  background: #00A3E0;
+  background: #B5121B;
   color: white;
   padding: 20px;
   text-align: center;
@@ -16,10 +16,6 @@ header {
   gap: 10px;
   padding: 10px;
   background: white;
-}
-
-select {
-  padding: 6px;
 }
 
 .indicadores {
@@ -33,13 +29,34 @@ select {
   padding: 15px;
   flex: 1;
   border-left: 5px solid #B5121B;
+  font-weight: 600;
+}
+
+.main-layout {
+  display: flex;
+  height: 60vh;
+}
+
+#listaEventos {
+  width: 30%;
+  overflow-y: auto;
+  background: white;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.evento-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
 }
 
 #map {
-  height: 60vh;
+  width: 70%;
 }
 
 .graficos {
   padding: 20px;
   background: white;
+  display: grid;
+  gap: 30px;
 }
