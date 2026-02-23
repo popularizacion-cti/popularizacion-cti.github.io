@@ -226,7 +226,7 @@ function actualizarGraficos() {
         label: "Encuentros por año",
         data: Object.values(porAnio)
       }]
-    }
+    },
     options: {
     responsive: false,
     maintainAspectRatio: false
@@ -249,7 +249,7 @@ function actualizarGraficos() {
         label: "Asistentes por año",
         data: Object.values(asistentesAnio)
       }]
-    }
+    },
     options: {
     responsive: false,
     maintainAspectRatio: false
@@ -272,7 +272,7 @@ function actualizarGraficos() {
         label: "Encuentros por región",
         data: Object.values(regiones)
       }]
-    }
+    },
     options: {
     responsive: false,
     maintainAspectRatio: false
