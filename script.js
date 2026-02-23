@@ -50,12 +50,20 @@ async function cargarDatos() {
 }
 
 // ================================
-// MAPA BLOQUEADO EN PERÚ
+// MAPA FIJO BLOQUEADO EN PERÚ
 // ================================
 function inicializarMapa() {
 
   map = L.map('map', {
+    zoomControl: false,     // Quita botones +/-
+    dragging: false,        // No permite mover
+    scrollWheelZoom: false, // Desactiva zoom con rueda
+    doubleClickZoom: false,
+    boxZoom: false,
+    keyboard: false,
+    touchZoom: false,
     minZoom: 6,
+    maxZoom: 6,             // MISMO zoom = bloqueado
     maxBounds: [
       [-20, -85],
       [5, -65]
