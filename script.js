@@ -77,7 +77,7 @@ function inicializarMapa() {
       //    LATITUD controla ALTO (arriba-abajo)
       //    LONGITUD controla ANCHO (izquierda-derecha)
 
-      [-20, -90],   // 🔒 Alto inferior (Sur)  | 🔒 Ancho izquierdo (Oeste)
+      [-20, -85],   // 🔒 Alto inferior (Sur)  | 🔒 Ancho izquierdo (Oeste)
 
       // 👉 SEGUNDO PAR = ESQUINA NORESTE
       [5, -65]      // 🔒 Alto superior (Norte) | 🔒 Ancho derecho (Este)
