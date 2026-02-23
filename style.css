@@ -110,8 +110,6 @@ header {
 #map {
   width: 600px !important;     /* 🔒 ANCHO FIJO */
   height: 900px !important;    /* 🔒 ALTO FIJO */
-  min-width: 600px;            /* 🔒 Evita que flex lo reduzca */
-  max-width: 600px;            /* 🔒 Evita que crezca */
   flex: 0 0 600px;             /* 🔒 Bloquea comportamiento flex */
   border: 1px solid #ddd;
 }
