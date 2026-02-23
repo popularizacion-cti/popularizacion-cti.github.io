@@ -41,7 +41,8 @@ async function cargarDatos() {
     clubes: Number(r.c[11]?.v || 0),
     alumnos: Number(r.c[12]?.v || 0),
     docentes: Number(r.c[13]?.v || 0),
-    modalidad: r.c[14]?.v || ""
+    participantes: Number(r.c[14]?.v || 0),
+    modalidad: r.c[15]?.v || ""
   }));
 
   inicializarMapa();
@@ -173,7 +174,7 @@ function onEachRegion(feature, layer) {
     );
 
     const total = filtrados.length;
-    const asistentes = filtrados.reduce((a,b)=>a+b.alumnos,0);
+    const asistentes = filtrados.reduce((a,b)=>a+b.participantes,0);
 
     layer.bindPopup(`
       <strong>${regionNombre}</strong><br>
@@ -198,7 +199,7 @@ function actualizarLista() {
       <div class="evento-item">
         <strong>${e.nombre}</strong><br>
         ${e.region} - ${e.mes} ${e.anio}<br>
-        Asistentes: ${e.alumnos}
+        Asistentes: ${e.participantes}
       </div>
     `;
   });
@@ -211,7 +212,7 @@ function actualizarIndicadores() {
 
   const filtrados = aplicarFiltros();
   const regiones = new Set(filtrados.map(e=>e.region));
-  const asistentes = filtrados.reduce((a,b)=>a+b.alumnos,0);
+  const asistentes = filtrados.reduce((a,b)=>a+b.participantes,0);
 
   document.getElementById("kpiCobertura").innerHTML =
     `Cobertura territorial: ${regiones.size} regiones`;
@@ -256,7 +257,7 @@ function actualizarGraficos() {
   // Asistentes por año
   const asistentesAnio = {};
   filtrados.forEach(e=>{
-    asistentesAnio[e.anio] = (asistentesAnio[e.anio] || 0) + e.alumnos;
+    asistentesAnio[e.anio] = (asistentesAnio[e.anio] || 0) + e.participantes;
   });
 
   if (grafico2) grafico2.destroy();
