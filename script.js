@@ -227,6 +227,10 @@ function actualizarGraficos() {
         data: Object.values(porAnio)
       }]
     }
+    options: {
+    responsive: false,
+    maintainAspectRatio: false
+    }
   });
 
   // Asistentes por año
@@ -246,6 +250,10 @@ function actualizarGraficos() {
         data: Object.values(asistentesAnio)
       }]
     }
+    options: {
+    responsive: false,
+    maintainAspectRatio: false
+    }
   });
 
   // Regiones con más encuentros
@@ -264,6 +272,10 @@ function actualizarGraficos() {
         label: "Encuentros por región",
         data: Object.values(regiones)
       }]
+    }
+    options: {
+    responsive: false,
+    maintainAspectRatio: false
     }
   });
 }
