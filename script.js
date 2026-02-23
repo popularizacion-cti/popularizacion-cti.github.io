@@ -182,8 +182,8 @@ function onEachRegion(feature, layer) {
       <strong>${regionNombre}</strong><br>
       Encuentros: ${total}<br>
       Asistentes: ${asistentes}<br>
-            Estudiantes: ${alum}<br>
-            Docentes: ${doce}
+      - Estudiantes: ${alum}<br>
+      - Docentes: ${doce}
     `).openPopup();
   });
 }
@@ -203,9 +203,7 @@ function actualizarLista() {
       <div class="evento-item">
         <strong>${e.nombre}</strong><br>
         ${e.region} - ${e.mes} ${e.anio}<br>
-        Asistentes: ${e.participantes}
-            Estudiantes: ${e.alumnos}
-            Docentes: ${e.docentes}
+        Asistentes: ${e.participantes} (${e.alumnos} estudiantes y ${e.docentes} docentes)
       </div>
     `;
   });
