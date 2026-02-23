@@ -44,15 +44,15 @@ header {
 
 /* ================================
    LISTA LATERAL FIJA CON SCROLL
-   - Altura igual al mapa (600px)
+   - Altura igual al mapa (900px)
    - Scroll interno automático
    - Barra de scroll a la izquierda
    - Tamaño fijo dentro del layout
 ================================ */
 
 #listaEventos {
-  width: 320px;              /* 🔒 ANCHO FIJO DE LA LISTA */
-  height: 600px;             /* 🔒 MISMA ALTURA QUE EL MAPA */
+  width: 35%;              /* 🔒 ANCHO FIJO DE LA LISTA */
+  height: 900px;             /* 🔒 MISMA ALTURA QUE EL MAPA */
   background: white;
   padding: 10px;
   border-right: 1px solid #ddd;
@@ -60,7 +60,7 @@ header {
   overflow-y: auto;          /* 🔒 Activa scroll vertical */
   overflow-x: hidden;
 
-  flex: 0 0 320px;           /* 🔒 Evita que flex lo deforme */
+  /*flex: 0 0 320px;           /* 🔒 Evita que flex lo deforme */
 
   direction: rtl;            /* 🔒 Mueve scrollbar a la izquierda */
 }
