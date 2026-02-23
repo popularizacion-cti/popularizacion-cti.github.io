@@ -113,6 +113,7 @@ header {
   min-width: 600px;            /* 🔒 Evita que flex lo reduzca */
   max-width: 600px;            /* 🔒 Evita que crezca */
   flex: 0 0 600px;             /* 🔒 Bloquea comportamiento flex */
+  border: 1px solid #ddd;
 }
 
 /* ================================
@@ -130,8 +131,10 @@ header {
 
 /* Cada gráfico */
 .graficos canvas {
-  width: 600px !important;
+  width: 30% !important;
   height: 400px !important;
+  min-width: 400px;
+  max-width: 600px;
   background: white;
   border: 1px solid #ddd;
   padding: 10px;
