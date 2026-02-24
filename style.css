@@ -151,7 +151,7 @@ header {
   /* Mapa se adapta al ancho */
   #map {
     width: 90% !important;
-    height: 90% !important;
+    height: 300px !important;
     min-width: unset;
     max-width: unset;
     /*flex: 0 0 320;
