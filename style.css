@@ -13,7 +13,6 @@ header {
 
 .filters {
   display: flex;
-  justify-content: center;   /* centra el bloque */
   align-items: flex-start;
   gap: 10px;
   padding: 10px;
@@ -22,7 +21,6 @@ header {
 
 .indicadores {
   display: flex;
-  justify-content: center;   /* centra el bloque */
   align-items: flex-start;
   gap: 15px;
   padding: 10px;
@@ -146,6 +144,23 @@ header {
 
 @media (max-width: 1024px) {
 
+  .filters {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+    background: white;
+  }
+  
+  .indicadores {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 10px;
+  }
+  
   /* Layout pasa de horizontal a vertical */
   .main-layout {
     flex-direction: column;
