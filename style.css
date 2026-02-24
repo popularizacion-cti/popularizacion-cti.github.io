@@ -154,7 +154,7 @@ header {
     height: 90% !important;
     min-width: unset;
     max-width: unset;
-    flex: 0 0 90%;
+    /*flex: 0 0 320;
   }
 
   /* Lista ocupa todo el ancho */
