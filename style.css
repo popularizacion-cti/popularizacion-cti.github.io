@@ -60,7 +60,7 @@ header {
   overflow-y: auto;          /* 🔒 Activa scroll vertical */
   overflow-x: hidden;
 
-  *flex: 0 0 320px;           /* 🔒 Evita que flex lo deforme */
+  flex: 0 0 320px;           /* 🔒 Evita que flex lo deforme */
 
   direction: rtl;            /* 🔒 Mueve scrollbar a la izquierda */
 }
