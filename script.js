@@ -221,13 +221,13 @@ function actualizarIndicadores() {
   const doce = filtrados.reduce((a,b)=>a+b.docentes,0);
 
   document.getElementById("kpiCobertura").innerHTML =
-    `Cobertura territorial: ${regiones.size} regiones`;
+    `Cobertura: ${regiones.size} regiones`;
 
   document.getElementById("kpiTotal").innerHTML =
-    `Total encuentros: ${filtrados.length}`;
+    `Encuentros: ${filtrados.length}`;
 
   document.getElementById("kpiAsistentes").innerHTML =
-    `Total asistentes: ${asistentes} (${alum} estudiantes y ${doce} docentes)`;
+    `Asistentes: ${asistentes} (${alum} estudiantes y ${doce} docentes)`;
 }
 
 // ================================
