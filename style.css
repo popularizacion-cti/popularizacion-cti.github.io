@@ -148,24 +148,24 @@ header {
     align-items: center;
   }
 
-  /* Lista ocupa todo el ancho */
-  #listaEventos {
-    width: 95%;
-    height: 300px;   /* más pequeña en móvil */
-    flex: none;
-    border-right: none;
-    border-bottom: 1px solid #ddd;
-  }
-
   /* Mapa se adapta al ancho */
   #map {
-    width: 95% !important;
-    height: 450px !important;
+    width: 90% !important;
+    height: 90px !important;
     min-width: unset;
     max-width: unset;
     flex: none;
   }
 
+  /* Lista ocupa todo el ancho */
+  #listaEventos {
+    width: 90%;
+    height: 300px;   /* más pequeña en móvil */
+    flex: none;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+  
   /* Gráficos uno debajo del otro */
   .graficos-container {
     flex-direction: column;
