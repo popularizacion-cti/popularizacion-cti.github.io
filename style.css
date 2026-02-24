@@ -150,7 +150,7 @@ header {
 
   /* Lista ocupa todo el ancho */
   #listaEventos {
-    width: 90%;
+    width: 80%;
     height: 300px;   /* más pequeña en móvil */
     flex: none;
     border-right: none;
@@ -159,11 +159,11 @@ header {
 
   /* Mapa se adapta al ancho */
   #map {
-    width: 90% !important;
+    width: 80% !important;
     height: 300px !important;
     min-width: unset;
     max-width: unset;
-    /*flex: 0 0 320;
+    flex: 0 0 320;
   }
   
   /* Gráficos uno debajo del otro */
@@ -173,7 +173,7 @@ header {
   }
 
   .grafico-box {
-    width: 95% !important;
-    height: 350px !important;
+    width: 80% !important;
+    height: 300px !important;
   }
 }
