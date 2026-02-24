@@ -151,10 +151,10 @@ header {
   /* Mapa se adapta al ancho */
   #map {
     width: 90% !important;
-    height: 90px !important;
+    height: 90% !important;
     min-width: unset;
     max-width: unset;
-    flex: none;
+    flex: 0 0 90%;
   }
 
   /* Lista ocupa todo el ancho */
