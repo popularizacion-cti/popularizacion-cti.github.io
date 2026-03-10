@@ -1,43 +1,252 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<meta charset="utf-8" />
-<title>Eventos en Perú</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<title>Popularización de la Ciencia | CONCYTEC</title>
 
 <style>
-#map {
-  height: 800px;
+
+body{
+font-family: Arial, Helvetica, sans-serif;
+margin:0;
+background:#f5f5f5;
+color:#333;
 }
+
+/* HEADER */
+
+header{
+background:#003366;
+color:white;
+padding:15px;
+}
+
+header h1{
+margin:0;
+font-size:24px;
+}
+
+/* NAV */
+
+nav{
+background:#005a9c;
+padding:10px;
+}
+
+nav a{
+color:white;
+margin-right:20px;
+text-decoration:none;
+font-weight:bold;
+}
+
+nav a:hover{
+text-decoration:underline;
+}
+
+/* CAROUSEL */
+
+.carousel{
+position:relative;
+max-width:100%;
+height:400px;
+overflow:hidden;
+}
+
+.slide{
+display:none;
+position:absolute;
+width:100%;
+height:100%;
+}
+
+.slide img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.slide a{
+position:absolute;
+bottom:20px;
+left:20px;
+background:rgba(0,0,0,0.6);
+color:white;
+padding:10px 15px;
+text-decoration:none;
+font-size:18px;
+}
+
+/* SECCIONES */
+
+.section{
+padding:40px;
+background:white;
+margin:20px;
+border-radius:6px;
+}
+
+.section h2{
+margin-top:0;
+color:#003366;
+}
+
+/* HERRAMIENTAS */
+
+.tools{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.tool-card{
+background:#f0f0f0;
+padding:20px;
+border-radius:6px;
+text-align:center;
+}
+
+.tool-card a{
+text-decoration:none;
+font-weight:bold;
+color:#003366;
+}
+
+/* FOOTER */
+
+footer{
+background:#003366;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
 </style>
 </head>
 
 <body>
 
-<h2>Encuentros de CCyT en Perú 2026</h2>
-<div id="map"></div>
+<header>
+<h1>Popularización de la Ciencia</h1>
+<p>Consejo Nacional de Ciencia, Tecnología e Innovación</p>
+</header>
+
+<nav>
+<a href="#">Inicio</a>
+<a href="#">Herramientas</a>
+<a href="#">Actividades</a>
+<a href="#">Recursos</a>
+<a href="#">Contacto</a>
+</nav>
+
+<!-- CARRUSEL -->
+
+<div class="carousel">
+
+<div class="slide">
+<img src="img/ciencia1.jpg">
+<a href="#">Semana de la Ciencia</a>
+</div>
+
+<div class="slide">
+<img src="img/ciencia2.jpg">
+<a href="#">Mapa de Actividades Científicas</a>
+</div>
+
+<div class="slide">
+<img src="img/ciencia3.jpg">
+<a href="#">Recursos Educativos</a>
+</div>
+
+</div>
+
+
+<!-- HERRAMIENTAS -->
+
+<div class="section">
+
+<h2>Herramientas de Popularización</h2>
+
+<div class="tools">
+
+<div class="tool-card">
+<h3>Mapa de Actividades</h3>
+<p>Explora eventos científicos en todo el país</p>
+<a href="#">Ver mapa</a>
+</div>
+
+<div class="tool-card">
+<h3>Repositorio Educativo</h3>
+<p>Materiales para docentes y divulgadores</p>
+<a href="#">Explorar</a>
+</div>
+
+<div class="tool-card">
+<h3>Guías de Divulgación</h3>
+<p>Herramientas para comunicar ciencia</p>
+<a href="#">Leer más</a>
+</div>
+
+<div class="tool-card">
+<h3>Eventos Nacionales</h3>
+<p>Ferias, festivales y actividades científicas</p>
+<a href="#">Ver agenda</a>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- NOTICIAS -->
+
+<div class="section">
+
+<h2>Actividades recientes</h2>
+
+<ul>
+<li>Convocatoria a actividades por la Semana de la Ciencia</li>
+<li>Lanzamiento del mapa nacional de divulgación</li>
+<li>Publicación de nuevas guías de comunicación científica</li>
+</ul>
+
+</div>
+
+
+<footer>
+
+<p>© 2026 CONCYTEC - Popularización de la Ciencia</p>
+
+</footer>
+
 
 <script>
 
-// Crear mapa centrado en Perú
-var map = L.map('map').setView([-9.19, -75.015], 6);
+let slideIndex = 0;
+showSlides();
 
-// Capa base OpenStreetMap
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap'
-}).addTo(map);
+function showSlides() {
 
-// Ejemplo de evento
-L.marker([-12.0464, -77.0428]).addTo(map)
-    .bindPopup("<b>Evento en Lima</b><br>15 de Marzo 2026");
+let slides = document.getElementsByClassName("slide");
 
-L.marker([-13.5319, -71.9675]).addTo(map)
-  .bindPopup("<b>Evento en Cusco</b><br>20 de Junio 2026");
+for (let i = 0; i < slides.length; i++) {
+slides[i].style.display = "none";
+}
 
-L.marker([-16.4090, -71.5375]).addTo(map)
-  .bindPopup("<b>Evento en Arequipa</b><br>10 de Agosto 2026");
+slideIndex++;
+
+if (slideIndex > slides.length) {
+slideIndex = 1;
+}
+
+slides[slideIndex-1].style.display = "block";
+
+setTimeout(showSlides, 4000);
+
+}
 
 </script>
 
