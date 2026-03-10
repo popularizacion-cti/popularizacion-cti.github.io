@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Popularización de la Ciencia | CONCYTEC</title>
 
 <style>
@@ -11,33 +10,27 @@
 body{
 font-family: Arial, Helvetica, sans-serif;
 margin:0;
-background:#f5f5f5;
+background:#f4f6f9;
 color:#333;
 }
-
-/* HEADER */
 
 header{
 background:#003366;
 color:white;
-padding:15px;
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
 header h1{
 margin:0;
-font-size:24px;
-}
-
-/* NAV */
-
-nav{
-background:#005a9c;
-padding:10px;
+font-size:20px;
 }
 
 nav a{
 color:white;
-margin-right:20px;
+margin-left:20px;
 text-decoration:none;
 font-weight:bold;
 }
@@ -46,75 +39,116 @@ nav a:hover{
 text-decoration:underline;
 }
 
-/* CAROUSEL */
+/* Carrusel */
 
 .carousel{
-position:relative;
-max-width:100%;
-height:400px;
+width:100%;
+height:420px;
 overflow:hidden;
+position:relative;
+}
+
+.slides{
+display:flex;
+width:300%;
+animation:slide 15s infinite;
 }
 
 .slide{
-display:none;
-position:absolute;
 width:100%;
-height:100%;
+flex-shrink:0;
+position:relative;
 }
 
 .slide img{
 width:100%;
-height:100%;
+height:420px;
 object-fit:cover;
 }
 
-.slide a{
+.slide-text{
 position:absolute;
-bottom:20px;
-left:20px;
+bottom:40px;
+left:40px;
 background:rgba(0,0,0,0.6);
 color:white;
-padding:10px 15px;
-text-decoration:none;
-font-size:18px;
+padding:15px 20px;
+border-radius:6px;
 }
 
-/* SECCIONES */
+@keyframes slide{
+
+0%{margin-left:0}
+30%{margin-left:0}
+
+33%{margin-left:-100%}
+63%{margin-left:-100%}
+
+66%{margin-left:-200%}
+96%{margin-left:-200%}
+
+}
+
+/* Herramientas */
 
 .section{
-padding:40px;
-background:white;
-margin:20px;
-border-radius:6px;
+padding:60px 40px;
+max-width:1200px;
+margin:auto;
 }
 
 .section h2{
-margin-top:0;
-color:#003366;
-}
-
-/* HERRAMIENTAS */
-
-.tools{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-}
-
-.tool-card{
-background:#f0f0f0;
-padding:20px;
-border-radius:6px;
 text-align:center;
+margin-bottom:40px;
 }
 
-.tool-card a{
-text-decoration:none;
+/* Tarjetas */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:white;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+overflow:hidden;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card img{
+width:100%;
+height:160px;
+object-fit:cover;
+}
+
+.card-content{
+padding:20px;
+}
+
+.card-content h3{
+margin-top:0;
+}
+
+.card-content a{
+display:inline-block;
+margin-top:10px;
+color:#0056b3;
 font-weight:bold;
-color:#003366;
+text-decoration:none;
 }
 
-/* FOOTER */
+.card-content a:hover{
+text-decoration:underline;
+}
+
+/* Footer */
 
 footer{
 background:#003366;
@@ -125,130 +159,121 @@ margin-top:40px;
 }
 
 </style>
+
 </head>
+
 
 <body>
 
 <header>
 <h1>Popularización de la Ciencia</h1>
-<p>Consejo Nacional de Ciencia, Tecnología e Innovación</p>
-</header>
 
 <nav>
 <a href="#">Inicio</a>
-<a href="#">Herramientas</a>
 <a href="#">Actividades</a>
+<a href="#">Herramientas</a>
 <a href="#">Recursos</a>
 <a href="#">Contacto</a>
 </nav>
+</header>
 
-<!-- CARRUSEL -->
 
-<div class="carousel">
+<!-- Carrusel -->
+
+<section class="carousel">
+
+<div class="slides">
 
 <div class="slide">
 <img src="img/ciencia1.jpg">
-<a href="#">Semana de la Ciencia</a>
+<div class="slide-text">
+<h2>Semana de la Ciencia</h2>
+<p>Actividades en todo el Perú</p>
+</div>
 </div>
 
 <div class="slide">
 <img src="img/ciencia2.jpg">
-<a href="#">Mapa de Actividades Científicas</a>
+<div class="slide-text">
+<h2>Mapa Nacional de Actividades</h2>
+<p>Explora eventos científicos</p>
+</div>
 </div>
 
 <div class="slide">
 <img src="img/ciencia3.jpg">
-<a href="#">Recursos Educativos</a>
+<div class="slide-text">
+<h2>Recursos Educativos</h2>
+<p>Materiales para docentes y estudiantes</p>
+</div>
 </div>
 
 </div>
 
+</section>
 
-<!-- HERRAMIENTAS -->
 
-<div class="section">
+
+<!-- Herramientas -->
+
+<section class="section">
 
 <h2>Herramientas de Popularización</h2>
 
-<div class="tools">
+<div class="cards">
 
-<div class="tool-card">
+
+<div class="card">
+<img src="img/mapa.jpg">
+<div class="card-content">
 <h3>Mapa de Actividades</h3>
-<p>Explora eventos científicos en todo el país</p>
-<a href="#">Ver mapa</a>
+<p>Explora eventos y actividades científicas en el país.</p>
+<a href="#">Ver mapa →</a>
+</div>
 </div>
 
-<div class="tool-card">
+
+<div class="card">
+<img src="img/eventos.jpg">
+<div class="card-content">
+<h3>Registro de Actividades</h3>
+<p>Plataforma para registrar eventos de ciencia.</p>
+<a href="#">Registrar actividad →</a>
+</div>
+</div>
+
+
+<div class="card">
+<img src="img/recursos.jpg">
+<div class="card-content">
 <h3>Repositorio Educativo</h3>
-<p>Materiales para docentes y divulgadores</p>
-<a href="#">Explorar</a>
+<p>Material de divulgación para docentes.</p>
+<a href="#">Explorar →</a>
 </div>
-
-<div class="tool-card">
-<h3>Guías de Divulgación</h3>
-<p>Herramientas para comunicar ciencia</p>
-<a href="#">Leer más</a>
-</div>
-
-<div class="tool-card">
-<h3>Eventos Nacionales</h3>
-<p>Ferias, festivales y actividades científicas</p>
-<a href="#">Ver agenda</a>
-</div>
-
-</div>
-
 </div>
 
 
-<!-- NOTICIAS -->
+<div class="card">
+<img src="img/redes.jpg">
+<div class="card-content">
+<h3>Red de Divulgadores</h3>
+<p>Comunidad nacional de comunicación científica.</p>
+<a href="#">Conocer más →</a>
+</div>
+</div>
 
-<div class="section">
-
-<h2>Actividades recientes</h2>
-
-<ul>
-<li>Convocatoria a actividades por la Semana de la Ciencia</li>
-<li>Lanzamiento del mapa nacional de divulgación</li>
-<li>Publicación de nuevas guías de comunicación científica</li>
-</ul>
 
 </div>
+
+</section>
+
 
 
 <footer>
 
-<p>© 2026 CONCYTEC - Popularización de la Ciencia</p>
+<p>© 2026 CONCYTEC – Dirección de Políticas y Programas de CTI</p>
 
 </footer>
-
-
-<script>
-
-let slideIndex = 0;
-showSlides();
-
-function showSlides() {
-
-let slides = document.getElementsByClassName("slide");
-
-for (let i = 0; i < slides.length; i++) {
-slides[i].style.display = "none";
-}
-
-slideIndex++;
-
-if (slideIndex > slides.length) {
-slideIndex = 1;
-}
-
-slides[slideIndex-1].style.display = "block";
-
-setTimeout(showSlides, 4000);
-
-}
-
-</script>
 
 </body>
 </html>
