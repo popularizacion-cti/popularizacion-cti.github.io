@@ -168,3 +168,32 @@ footer {
     margin-left: auto;
     margin-right: auto;
 }
+
+/* FLECHAS DE NAVEGACIÓN DEL CARRUSEL */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* Centrado vertical exacto */
+    padding: 15px 20px;
+    color: white;
+    font-size: 24px;
+    background: rgba(0, 0, 0, 0.4); /* Fondo semi-transparente */
+    border: none;
+    z-index: 10; /* Asegura que estén sobre las imágenes */
+    transition: background 0.3s ease;
+}
+
+.prev {
+    left: 0;
+    border-radius: 0 5px 5px 0; /* Bordes redondeados lado derecho */
+}
+
+.next {
+    right: 0;
+    border-radius: 5px 0 0 5px; /* Bordes redondeados lado izquierdo */
+}
+
+.prev:hover, .next:hover {
+    background: var(--primary-color); /* Usa tu color azul institucional */
+}
