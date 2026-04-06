@@ -6,10 +6,17 @@
 }
 
 body {
-    margin: 0;
+    margin: 0 auto;
+    max-width: 1200px;
     font-family: 'Roboto', sans-serif;
     background: var(--light-bg);
     color: #333;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Opcional: Agrega una sutil sombra en los bordes para separarlo del fondo del navegador en pantallas grandes */
+}
+
+/* Color de fondo a la "ventana" detrás de la web para que contraste con tu página centrada */
+html {
+    background-color: #e9ecef; 
 }
 
 /* HERO CON TEXTO RESALTADO */
