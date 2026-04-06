@@ -65,7 +65,9 @@ body {
 .carousel {
     position: relative;
     overflow: hidden;
-    height: 450px;
+    height: 50vw;
+    max-height: 550px; 
+    min-height: 350px;
 }
 
 .slide {
@@ -158,4 +160,11 @@ footer {
     padding-top: 20px;
     text-align: center;
     font-size: 13px;
+}
+
+/* Limitar el contenido en pantallas gigantes */
+.hero, .carousel, .tools, footer {
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
 }
