@@ -214,7 +214,7 @@ footer {
 }
 
 .footer-logo {
-    max-width: 120px; /* Ajusta este valor según el tamaño de tu logo */
+    max-width: 240px; /* Ajusta este valor según el tamaño de tu logo */
     height: auto;
     /* Si tu logo es oscuro y no se ve bien en el fondo azul oscuro, 
        puedes ponerle un fondo blanco temporalmente agregando: 
