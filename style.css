@@ -131,6 +131,45 @@ html {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
+/* FOOTER */
+footer {
+    background: var(--dark-bg);
+    color: white;
+    padding: 40px 10% 20px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.footer-info p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.footer-social a {
+    color: white;
+    font-size: 24px;
+    margin-left: 20px;
+    transition: 0.3s;
+}
+
+.footer-social a:hover {
+    color: var(--accent-color);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+}
+
+
 /* Limitar el contenido en pantallas gigantes */
 .hero, .carousel, .tools, footer {
     max-width: 1920px;
@@ -165,4 +204,25 @@ html {
 
 .prev:hover, .next:hover {
     background: var(--primary-color); /* Usa tu color azul institucional */
+}
+
+/* ALINEACIÓN DEL LOGO Y TEXTO EN EL FOOTER */
+.footer-info {
+    display: flex;
+    align-items: center; /* Centra ambos elementos verticalmente */
+    gap: 20px; /* Espacio de separación entre el logo y el texto */
+    max-width: 70%; /* Evita que el texto empuje los íconos sociales */
+}
+
+.footer-logo {
+    max-width: 240px; /* Ajusta este valor según el tamaño de tu logo */
+    height: auto;
+    /* Si tu logo es oscuro y no se ve bien en el fondo azul oscuro, 
+       puedes ponerle un fondo blanco temporalmente agregando: 
+       background: white; padding: 5px; border-radius: 5px; */
+}
+
+.footer-text h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
 }
