@@ -204,3 +204,24 @@ footer {
 .prev:hover, .next:hover {
     background: var(--primary-color); /* Usa tu color azul institucional */
 }
+
+/* ALINEACIÓN DEL LOGO Y TEXTO EN EL FOOTER */
+.footer-info {
+    display: flex;
+    align-items: center; /* Centra ambos elementos verticalmente */
+    gap: 20px; /* Espacio de separación entre el logo y el texto */
+    max-width: 70%; /* Evita que el texto empuje los íconos sociales */
+}
+
+.footer-logo {
+    max-width: 120px; /* Ajusta este valor según el tamaño de tu logo */
+    height: auto;
+    /* Si tu logo es oscuro y no se ve bien en el fondo azul oscuro, 
+       puedes ponerle un fondo blanco temporalmente agregando: 
+       background: white; padding: 5px; border-radius: 5px; */
+}
+
+.footer-text h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
