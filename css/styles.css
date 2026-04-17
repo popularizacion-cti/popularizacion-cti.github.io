@@ -1,0 +1,398 @@
+/* Variables de colores actualizadas */
+:root {
+    --primary-color: #1e6c93; /* Tu nuevo azul preponderante */
+    --primary-dark: #154d69;  /* Una versión más oscura para efectos hover */
+    --accent-color: #fc3d21;  /* Mantenemos el rojo NASA para detalles pequeños */
+    --bg-dark: #0a192f;       /* Un azul marino muy oscuro para el fondo del Nav/Footer */
+    --text-light: #ffffff;
+    --text-dark: #1a1a1a;
+    --bg-light: #f0f4f7;      /* Un gris azulado muy suave para el fondo general */
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 80vh; /* Un poco más alto para que el video luzca */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -2;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.60); /* Sombra oscura al 50% */
+    z-index: -1;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    color: var(--text-light);
+    text-align: center;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--bg-light);
+}
+
+/* Sub Nav */
+.sub-nav {
+    background-color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.sub-nav a {
+    text-decoration: none;
+    color: var(--primary-dark);
+    margin: 0 15px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.sub-nav a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+
+/* Grid de Contenido */
+.main-content {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.main-content h2 {
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.card-grid {
+    display: grid;
+    /* La magia de la responsividad: crea columnas de min 300px, si hay más espacio, crecen */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ;
+    cursor: pointer;
+}
+
+.card-img {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+/*.tag {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}*/
+
+/* Etiqueta de la fuente de noticias (Estilo Píldora) */
+.tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 12px;
+    border-radius: 20px; /* Esto hace los bordes redondos */
+    margin-bottom: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* El color de fondo y texto lo inyectaremos desde JavaScript */
+}
+
+.card-content h3 {
+    margin: 10px 0;
+    font-size: 1.3rem;
+}
+
+/* === MEDIA QUERIES (Responsividad para Celulares y Tablets) === */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Ocultamos el menú normal en móviles */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: var(--bg-dark);
+        padding: 20px 0;
+    }
+
+    .nav-links.active {
+        display: flex; /* Se muestra cuando tiene la clase activa desde JS */
+    }
+
+    .nav-links a {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .mobile-menu-btn {
+        display: block; /* Mostramos el botón de hamburguesa */
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .sub-nav a {
+        display: block;
+        margin: 10px 0;
+    }
+}
+
+
+/* Añade esto al final de tu CSS */
+.content-section {
+    margin-bottom: 60px; /* Da espacio respirable entre cada sección */
+    padding-top: 80px; /* Esto evita que el menú superior fije (sticky) tape el título al hacer clic */
+    margin-top: -40px; /* Compensa el padding para no dañar el diseño visual */
+}
+
+.content-section h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: var(--primary-dark); /* Títulos en el nuevo azul */
+    /*border-bottom: 4px solid var(--primary-color);*/
+    display: inline-block;
+    padding-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+}
+
+/* =========================================
+   ESTILOS DEL FOOTER
+   ========================================= */
+.footer {
+    background-color: var(--primary-dark); /* Tu azul #1e6c93 */
+    color: var(--text-light); /* Blanco */
+    padding: 15px 15px;
+    margin-top: 60px;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Columna del Logo */
+.footer-logo {
+    flex: 1.5;
+    min-width: 200px;
+}
+
+/* Columna de Texto */
+.footer-info {
+    flex: 3;
+    min-width: 300px;
+    text-align: left;
+}
+
+.footer-info h3 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--text-light);
+    border: none; /* Quitamos el borde que le pusimos a los h2 antes */
+}
+
+.footer-info p {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.footer-info a {
+    color: var(--text-light);
+    text-decoration: underline;
+}
+
+.footer-info a:hover {
+    color: #e0e0e0;
+}
+
+/* Columna de Redes Sociales */
+.footer-social {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 45px); /* Crea una cuadrícula de 2x2 */
+    gap: 15px;
+    justify-content: end; /* Los alinea a la derecha en PC */
+}
+
+.social-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    background-color: white;
+    color: var(--text-dark); /* Icono en color oscuro */
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.1); /* Efecto de crecimiento al pasar el mouse */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* =========================================
+   RESPONSIVIDAD DEL FOOTER (MÓVILES)
+   ========================================= */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column; /* Apila las columnas verticalmente */
+        text-align: center;
+    }
+
+    .footer-info {
+        text-align: center;
+    }
+
+    .footer-social {
+        justify-content: center; /* Centra los íconos en celulares */
+        margin-top: 20px;
+    }
+}
+
+/* Quita el subrayado y mantiene el color original del texto en las tarjetas */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block; /* Importante para que el enlace ocupe todo el espacio de la tarjeta */
+}
+
+/* Opcional: Para que el efecto de elevarse (hover) se sienta más fluido al usar el enlace */
+.card-link:hover .card {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(30, 108, 147, 0.2);
+}
+
+.card-vertical {
+    aspect-ratio: 1 / 1.25; /* Relación de aspecto vertical */
+    height: auto !important; /* Anulamos el height de las otras tarjetas */
+}
+
+.card-vertical .card-img {
+    height: 100%;
+}
+
+/* Ajuste del grid para que no se vean gigantes */
+.grid-vertical {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
