@@ -8,7 +8,8 @@
     --text-dark: #1a1a1a;
     --bg-light: #f0f4f7;      /* Un gris azulado muy suave para el fondo general */
 }
-* {
+
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -103,7 +104,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.60); /* Sombra oscura al 50% */
+    background: rgba(0, 0, 0, 0.50); /* Sombra oscura al 50% */
     z-index: -1;
 }
 
@@ -169,21 +170,40 @@ body {
 
 .card {
     background: white;
-    border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-    transition: transform 0.3s ;
     cursor: pointer;
+    border-radius: 15px; /* Bordes redondeados y modernos */
+    border: 1px solid rgba(255,255,255,0.2); /* Borde sutil, casi invisible */
+    position: relative; /* Necesario para posicionar el texto encima */
+    height: 400px;      /* Altura fija para que todas las tarjetas sean uniformes */
+    display: flex;
+    align-items: flex-end; /* Alinea el contenido (texto) al fondo de la tarjeta */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-img {
-    height: 200px;
     background-size: cover;
     background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    z-index: 1; /* Se queda al fondo */
+    transition: transform 0.5s ease; /* Efecto de zoom suave al pasar el mouse */
 }
 
 .card-content {
-    padding: 20px;
+    position: relative;
+    z-index: 2; /* Se coloca por encima de la imagen */
+    width: 100%;
+    padding: 25px 20px;
+    
+    /* FONDO SEMI-TRANSPARENTE (Glassmorphism) */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 90%, transparent 100%);
+    color: white; /* Texto blanco para que resalte */
 }
 
 /*.tag {
@@ -208,8 +228,17 @@ body {
 }
 
 .card-content h3 {
-    margin: 10px 0;
-    font-size: 1.3rem;
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.9); /* Sombra para máxima legibilidad */
+}
+
+.card-content p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
 }
 
 /* === MEDIA QUERIES (Responsividad para Celulares y Tablets) === */
@@ -254,6 +283,7 @@ body {
     margin-bottom: 60px; /* Da espacio respirable entre cada sección */
     padding-top: 80px; /* Esto evita que el menú superior fije (sticky) tape el título al hacer clic */
     margin-top: -40px; /* Compensa el padding para no dañar el diseño visual */
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); /* Degradado muy sutil */
 }
 
 .content-section h2 {
@@ -301,7 +331,7 @@ body {
 }
 
 .footer-info h3 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 10px;
     color: var(--text-light);
@@ -375,12 +405,22 @@ body {
     text-decoration: none;
     color: inherit;
     display: block; /* Importante para que el enlace ocupe todo el espacio de la tarjeta */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    will-change: transform;
 }
 
+
+
+
 /* Opcional: Para que el efecto de elevarse (hover) se sienta más fluido al usar el enlace */
+.card-link:hover {
+    /*transform: scale(1.05); /* Zoom a la imagen de fondo */
+    transform: translateY(-12px) scale(1.02); /* Levitación más pronunciada */
+    /*box-shadow: 0 20px 40px rgba(0, 242, 254, 0.15); /* Brillo del color de acento */
+}
+
 .card-link:hover .card {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(30, 108, 147, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .card-vertical {
@@ -396,3 +436,33 @@ body {
 .grid-vertical {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
+
+/* 3.1. Sección de Agenda POP como una línea de tiempo visual */
+#investigadores .card-grid {
+    display: flex; /* Cambiamos a flex para una línea de tiempo */
+    overflow-x: auto; /* Scroll horizontal si hay muchas efemérides */
+    padding: 20px;
+    gap: 40px;
+}
+
+#investigadores .card {
+    min-width: 300px;
+    position: relative;
+}
+
+/* Añadimos un conector visual, imitando las luces de la imagen */
+#investigadores .card::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -40px;
+    width: 40px;
+    height: 2px;
+    background: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+#investigadores .card:last-child::after {
+    display: none;
+}
+
