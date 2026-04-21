@@ -89,3 +89,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ejecutamos la función
     cargarNoticiasDesdeSheet();
 });
+
+/* 2.1. Efecto de inclinación 3D en tarjetas (imita holograma) */
+const cards = document.querySelectorAll('.card');
+
+cards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+        let rect = card.getBoundingClientRect();
+        let x = e.clientX - rect.left; // posición x dentro del elemento
+        let y = e.clientY - rect.top;  // posición y dentro del elemento
+        
+        let xPercent = (x / rect.width - 0.5) * 20; // Inclinación máx 10deg
+        let yPercent = (y / rect.height - 0.5) * -20;
+        
+        card.style.transform = `perspective(1000px) rotateX(${yPercent}deg) rotateY(${xPercent}deg)`;
+    });
+    
+    card.addEventListener('mouseleave', e => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+    });
+});
